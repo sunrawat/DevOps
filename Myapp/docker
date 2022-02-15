@@ -1,0 +1,71 @@
+docker run = docker create, docker start
+
+docker exec -i -t id sh // to go inside container
+  -i = interactive 
+  -t = pretty format
+  
+  -a = show me everything
+  
+  
+  
+  remove all images
+  docker rmi $(docker images -a -q)
+  
+  
+  remove all containers
+  docker stop $(docker ps -a -q)
+  docker rm $(docker ps -a -q)
+  
+  
+  
+  how to create a custom image 
+  1. choose a base image 
+  2. run commands for s/w
+  3. specify the base command at startup
+  
+  
+  filesystem snapshot  - bin lib 
+  startup command - 
+  
+  
+  docker build . or Dockerfile
+  
+  Image tagging
+  
+  
+  docker exec -it resis-older /bin/bash
+  
+  sudo docker network create mongo-network
+  sudo docker network ls
+  
+  docker run -d -p 27017:27017 -v ~/path-to-local-folder:/data/db --name mymongo mongo:latest
+  
+  docker run -d -p 27017:27017 -d  -e MONGO_INITDB_ROOT_USERNAME=admin  -e MONGO_INITDB_ROOT_PASSWORD=admin --name mymongo --net mongo-network mongo:latest
+  
+  docker run -d -p 8081:8081 -d  -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin  -e ME_CONFIG_MONGODB_ADMINPASSWORD=admin --name mymongo-express --net mongo-network -e ME_CONFIG_MONGODB_SERVER=mongo mongo-express:latest
+  
+  
+  
+  to install docker 
+  
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)"  -o /usr/local/bin/docker-compose
+sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo chmod +x /usr/bin/docker-compose
+
+To restart docker service
+sudo service docker restart
+  
+localhost error  
+sudo chmod 666 /var/run/docker.sock
+
+
+
+
+to go inside container 
+exec id /bin/sh or /bin/bash
+
+
+to build a image docker build -t mybuild:1.1 . from Dockerfile
+
+
+docker build -t mybuild:1.1 .
